@@ -20,15 +20,14 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		$this->load->library("Doctrine");
-		$user = new Entities\User;
-		/*$user->setFirstName('xuezheng.chang');
-		$user->setLastName('cxzlr');
-		$user->setPassword(md5('cxzlr'));
-		$user->setEmail('xuezheng.chang@hotmail[url=mailto:].com'[/url]);
-		$user->setWebsite('http://test.com');
-		$user->setCreated(new DateTime());
-		$this->doctrine->em->persist($user);*/
-		var_dump(APPPATH);
+		//$this->load->model("user");
+		require_once APPPATH."models/Product.php";
+		$user = new Product();
+		$user->setName("roy");
+		//var_dump($user);
+		$this->doctrine->em->persist($user);
+		$this->doctrine->em->flush();
+		//var_dump($this->doctrine->em);
 		$this->load->view('welcome_message');
 	}
 }

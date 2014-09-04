@@ -3,17 +3,17 @@ use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 Class Doctrine{
 	public $em = null;
-	public function __contruct(){
+	public function __construct(){
 		require_once APPPATH."libraries/doctrine/autoload.php";
-		$paths = array(APPPATH."models");
-		$isDevMode = false;
+		$isDevMode = true;
+		$config = Setup::createAnnotationMetadataConfiguration(array(APPPATH."models"), $isDevMode);
 		$dbParams = array(
 			'driver'=>'pdo_mysql',
-			'user'=>'test',
-			'password'=>'123',
+			'user'=>'root',
+			'password'=>'',
 			'dbname'=>'test',
 		);
-		$config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
+		//$config = Setup::createAnnotationMetadataConfiguration(array(APPPATH."models"), $isDevMode);
 		$this->em = $entityManager = EntityManager::create($dbParams, $config);
 	}
 }
